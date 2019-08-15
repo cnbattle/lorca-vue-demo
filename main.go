@@ -43,18 +43,13 @@ func main() {
 	c := &counter{}
 	ui.Bind("counterAdd", c.Add)
 	ui.Bind("counterValue", c.Value)
-	//html, err := getHtmlString("./index.html")
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//ui.Load("data:text/html," + url.PathEscape(html))
 
 	ln, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer ln.Close()
-	go http.Serve(ln, http.FileServer(http.Dir("dist")))
+	go http.Serve(ln, http.FileServer(http.Dir(getHtmlDir())))
 	ui.Load(fmt.Sprintf("http://%s", ln.Addr()))
 
 	// Wait until the interrupt signal arrives or browser window is closed
@@ -73,6 +68,25 @@ func getArgs() (args []string) {
 		args = append(args, "--class=Lorca")
 	}
 	return args
+}
+
+func getHtmlDir() string {
+	dir := os.Getenv("HTML_DIR")
+	if dir == "" {
+		return "./dist"
+	}
+	return dir
+}
+
+func pathExists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, err
 }
 
 // getHtml
