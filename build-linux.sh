@@ -1,5 +1,4 @@
 #!/bin/sh
-
 APP=lorca-vue
 APPDIR=${APP}_1.0.0
 
@@ -10,9 +9,11 @@ mkdir -p $APPDIR/usr/share/icons/hicolor/1024x1024/apps
 mkdir -p $APPDIR/usr/share/icons/hicolor/256x256/apps
 mkdir -p $APPDIR/DEBIAN
 
-npm run build
+if [ ! -d "./dist/" ];then
+  npm run build
+fi
 
-go build -o $APPDIR/usr/bin/$APP
+go build -ldflags "-X main.SOURCE_DIR=/var/lorca-vue/" -o $APPDIR/usr/bin/$APP
 
 cp icons/icon.png $APPDIR/usr/share/icons/hicolor/1024x1024/apps/${APP}.png
 cp icons/icon.png $APPDIR/usr/share/icons/hicolor/256x256/apps/${APP}.png

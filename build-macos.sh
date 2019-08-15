@@ -3,9 +3,11 @@
 APP="lorca-vue.app"
 mkdir -p $APP/Contents/{MacOS,Resources}
 
-npm run build
+if [ ! -d "./dist/" ];then
+  npm run build
+fi
 
-go build -o $APP/Contents/MacOS/lorca-vue
+go build -ldflags "-X main.SOURCE_DIR=../Resources/html" -o $APP/Contents/MacOS/lorca-vue
 
 cat > $APP/Contents/Info.plist << EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -22,4 +24,5 @@ cat > $APP/Contents/Info.plist << EOF
 </plist>
 EOF
 cp icons/icon.icns $APP/Contents/Resources/icon.icns
+cp -r dist/* $APP/Contents/Resources/html
 find $APP

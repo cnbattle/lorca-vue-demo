@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
@@ -12,6 +11,10 @@ import (
 	"sync"
 
 	"github.com/zserge/lorca"
+)
+
+var (
+	SOURCE_DIR string
 )
 
 type counter struct {
@@ -71,26 +74,8 @@ func getArgs() (args []string) {
 }
 
 func getHtmlDir() string {
-	dir := os.Getenv("HTML_DIR")
-	if dir == "" {
+	if SOURCE_DIR == "" {
 		return "./dist"
 	}
-	return dir
-}
-
-func pathExists(path string) (bool, error) {
-	_, err := os.Stat(path)
-	if err == nil {
-		return true, nil
-	}
-	if os.IsNotExist(err) {
-		return false, nil
-	}
-	return false, err
-}
-
-// getHtml
-func getHtmlString(path string) (html string, err error) {
-	bt, err := ioutil.ReadFile(path)
-	return string(bt), err
+	return SOURCE_DIR
 }
