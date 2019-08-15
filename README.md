@@ -9,3 +9,15 @@ go run main.go
 ```
 
 ![](demo.png)
+
+
+### Build
+> I only Test `build-linux.sh`
+
+Linux use `build-linux.sh`,build to `xxx.deb` file.
+
+Mac use `build-macos.sh`,build to `xxx.app` file.
+
+Windows use `build-windows.bat`,build to `xxx.exe` file, next use `Inno Setup` or `NSIS` packaging with `dist` folder.
+
+
