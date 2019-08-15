@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
-	"net/url"
+	"net"
+	"net/http"
 	"os"
 	"os/signal"
 	"runtime"
@@ -41,11 +43,19 @@ func main() {
 	c := &counter{}
 	ui.Bind("counterAdd", c.Add)
 	ui.Bind("counterValue", c.Value)
-	html, err := getHtmlString("./index.html")
+	//html, err := getHtmlString("./index.html")
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//ui.Load("data:text/html," + url.PathEscape(html))
+
+	ln, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
 		log.Fatal(err)
 	}
-	ui.Load("data:text/html," + url.PathEscape(html))
+	defer ln.Close()
+	go http.Serve(ln, http.FileServer(http.Dir("dist")))
+	ui.Load(fmt.Sprintf("http://%s", ln.Addr()))
 
 	// Wait until the interrupt signal arrives or browser window is closed
 	sigc := make(chan os.Signal)

@@ -1,3 +1,11 @@
-# lorca vue demo
+# lorca-vue-demo
 
-![](./demo1.png)
+### run demo
+
+``` bash
+npm install
+npm run build
+go run main.go 
+```
+
+![](demo1.png)
