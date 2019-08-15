@@ -12,7 +12,7 @@ go run main.go
 
 
 ### Build
-> I only Test `build-linux.sh`
+> I only test `build-linux.sh`
 
 Linux use `build-linux.sh`,build to `xxx.deb` file.
 
