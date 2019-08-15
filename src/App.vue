@@ -62,7 +62,6 @@
 
   .counter {
     text-transform: uppercase;
-    color: #fff;
     font-weight: bold;
     font-size: 3rem;
   }

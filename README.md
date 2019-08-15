@@ -8,4 +8,4 @@ npm run build
 go run main.go 
 ```
 
-![](demo1.png)
+![](demo.png)
