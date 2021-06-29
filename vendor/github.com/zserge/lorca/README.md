@@ -1,6 +1,6 @@
 # Lorca
 
-[![Build Status](https://travis-ci.org/zserge/lorca.svg?branch=master)](https://travis-ci.org/zserge/lorca)
+[![Build Status](https://img.shields.io/github/workflow/status/zserge/lorca/CI%20Pipeline)](https://github.com/zserge/lorca)
 [![GoDoc](https://godoc.org/github.com/zserge/lorca?status.svg)](https://godoc.org/github.com/zserge/lorca)
 [![Go Report Card](https://goreportcard.com/badge/github.com/zserge/lorca)](https://goreportcard.com/report/github.com/zserge/lorca)
 
@@ -68,10 +68,20 @@ fmt.Println(m)
 <-ui.Done()
 ```
 
+<p align="center"><img src="examples/counter/counter.gif" /></p>
+
 Also, see [examples](examples) for more details about binding functions, embedding
 assets and packaging binaries.
 
-<p align="center"><img src="examples/counter/counter.gif" /></p>
+## Hello World
+
+Here are the steps to run the hello world example.
+
+```
+cd examples/counter
+go get
+go run ./
+```
 
 ## How it works
 

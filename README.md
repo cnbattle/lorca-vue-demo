@@ -5,7 +5,8 @@
 ``` bash
 npm install
 npm run build
-go run main.go 
+go mode vendor
+go run main.go
 ```
 
 ![](demo.png)
